@@ -8,8 +8,91 @@
 </head>
 <body>
     <div id="app">
-        <table id="theatresTable" class="table table-striped table-bordered">
+        <table id="theatreTable" class="table table-striped table-bordered">
+    
             <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Rating</th>
+            </tr>
+      
+     
+            <tr v-for="theatre in theaters">
+                <td @click="getTheatre(theatre.id)">{{ theatre.name }}</td>
+                <td>{{ theatre.price }}</td>
+                <td>{{ theatre.rating }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" @click="getTheatre(theatre.id)">Open Modal</button>
+                </td>
+            </tr>
+           
+        </table>
+        <div id="theatreInModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <td>{{ theatreInModal.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ theatreInModal.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>{{ theatreInModal.price }}</td>
+                            </tr>
+                            <tr>
+                                <th>Rating</th>
+                                <td>{{ theatreInModal.rating }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+<!-- <body>
+    <div id="app">
+    <table id="theatresTable" class="table table-striped table-bordered">
+      <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Rating</th>
+            </tr>
+            <tr v-for="theatre in theaters">
+                <td @click="getTheatre(theatre.id)">{{theatre.name}}</td>
+                <td>{{theatre.price}}</td>
+                <td>{{theatre.rating}}</td>
+            </tr>
+        </table>
+ 
+        
+            <div class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header"> 
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Modal body text goes there.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close </button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            <!-- <tr>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Rating</th>
@@ -18,31 +101,56 @@
                 <td>{{theatre.name}}</td>
                 <td>{{theatre.price}}</td>
                 <td>{{theatre.rating}}</td>
-            </tr>
-        </table>
+            </tr> -->
+        <!-- </table> -->
+    <!-- <div id="counter">
+        Counter:{{counter}}
+    </div> -->
     </div>
  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
- 
     <script src="https://unpkg.com/vue@3.3.11/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3.3.11/dist/vue.global.js"></script>
+    <script src="library-frontend/rest-client.js"></script> 
  
-    <script>
+    <!-- <script>
+        // const Counter={
+        //     data(){return{
+        //         counter:0
+
+        //     }
+        // }}
+        // const vue =Vue.createApp(Counter).mount('#counter')
+          
+               
+
         const vue = Vue.createApp({
             data() {
-                return { theaters:  [
+               
+                return { 
+                    theaters:[],
+                    theatreInModal:{name: null},
+                    // theaters:  [
 
 // { id:1,name:"The poidgeon",price:290,rating: 3},
 // { id:2,name: "Kunda Kino",price:130,rating:4},
 // { id:3 ,name:"Paladins:Champions of the Realm ",price:334,rating:5},
 // { id:4, name: "Super Mario Bros. Wonder" ,price:644,rating:6  }
  
-]
+// ]
             }
         },
         async created() {
             this.theaters = await (await fetch('http://localhost:8080/theaters')).json();
+        },
+        method:{
+            getTheatre:async function(id){
+                this.theatreInModal=await(await fetch(`http://localhost:8080/theatres/${id}`)).json()
+                let theatreInModal= new bootstrap.Modal(document.getElementById('theatreInModal'),{})
+                theatreInModal.show()
+            }
         }
     }).mount('#app')
-    </script>
+    </script> -->
 </body>
 </html>
