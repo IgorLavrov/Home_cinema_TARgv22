@@ -1,4 +1,4 @@
-const TheatreController= require('../Controllers/TheatreControllers.js')
+const TheatreController= require('./controllers/TheatreControllers.js')
 
 module.exports= (app)=>{
     app.route("/theatres")
