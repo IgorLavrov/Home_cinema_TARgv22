@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
 const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
-db.theatres = require("./models/Theatre.model")(sequelize,Sequelize)
+db.theaters = require("./models/Theatre.model")(sequelize,Sequelize)
 db.films = require("./models/Film.model")(sequelize,Sequelize)
 
 module.exports = db

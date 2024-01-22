@@ -9,11 +9,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        price: {
+        time: {
             type: Sequelize.DOUBLE,
             allowNull: false
         },
-        Genre:{
+        genre:{
             type: Sequelize.STRING,
             allowNull: false
         }

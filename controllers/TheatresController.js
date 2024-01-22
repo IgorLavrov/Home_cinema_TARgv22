@@ -1,8 +1,9 @@
 const {db} = require('../db');
-const Theatre = db.theatres
+const Theatre = db.theaters
 
 exports.getAll = async (req, res) => {
-    const Theatres = await Theatre.findAll({attributes:["name"]})
+    const Theatres = await Theatre.findAll({attributes:["name","price","rating"]})
+    // res.json(theatres)
     res.send(Theatres)
 }
 
