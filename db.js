@@ -17,6 +17,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.theaters = require("./models/Theatre.model")(sequelize,Sequelize)
 db.films = require("./models/Film.model")(sequelize,Sequelize)
+db.screenings = require("./models/Screening.model")(sequelize,Sequelize,db.theaters,db.films)
 
 module.exports = db
 
